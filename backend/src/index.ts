@@ -1,5 +1,12 @@
 import express from 'express';
 import cors from 'cors';
+import * as RecipeAPI from './recipe-api';
+
+/*
+Next call an endpoint from your backend
+https://api.spoonacular.com/recipes/findByIngredients?apiKey=YOUR-KEYd&ingredients=beef,tomatoes
+for this to happen, import the contents of the recipe-api.ts file
+*/
 
 // this line creates a new express app;
 const app = express();
@@ -13,9 +20,19 @@ app.use(express.json());
 // takes care of the security of the requests
 app.use(cors());
 
-// return a "success" message as a part of the response whenever this endpoint is called
+// https://api.spoonacular.com/recipes/findByIngredients?
+
+// http://localhost:5000/api/recipes/search
+
+// http://localhost:5000/api/recipes/findByIngredients
+// apiKey=YOUR-KEYd&ingredients=beef,tomatoes
+
 app.get("/api/recipes/search", async (req, res) => {
-    res.json({message: 'success!'});
+    const searchTerms = req.query.searchTerms as string;
+    const page = parseInt(req.query.page as string);
+    const results = await RecipeAPI.searchRecipes(searchTerms, page);
+
+    return res.json(results);
 })
 
 /*
