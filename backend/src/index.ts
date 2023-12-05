@@ -20,13 +20,6 @@ app.use(express.json());
 // takes care of the security of the requests
 app.use(cors());
 
-// https://api.spoonacular.com/recipes/findByIngredients?
-
-// http://localhost:5000/api/recipes/search
-
-// http://localhost:5000/api/recipes/findByIngredients
-// apiKey=YOUR-KEYd&ingredients=beef,tomatoes
-
 app.get("/api/recipes/search", async (req, res) => {
     const searchTerms = req.query.searchTerms as string;
     const page = parseInt(req.query.page as string);
