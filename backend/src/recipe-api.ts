@@ -1,7 +1,5 @@
 const apiKey = process.env.API_KEY;
-// const apiKey = "YOUR-KEY";
-
-export const searchRecipes = async (searchTerms: string, page: number) => {
+export const searchRecipes = async (searchTerms: string, page: number, ranking: number, sortOption: string) => {
     if (!apiKey) {
         throw new Error("API key not found")
     }
@@ -11,7 +9,9 @@ export const searchRecipes = async (searchTerms: string, page: number) => {
     const queryParams = {
         apiKey: apiKey,
         ingredients: searchTerms,
-        number: "10"
+        number: "10",
+        ranking: "1",
+        sort: "max-used-ingredients"
     }
     // attach query params to URL
     url.search = new URLSearchParams(queryParams).toString();

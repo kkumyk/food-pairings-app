@@ -30,8 +30,10 @@ app.use(cors());
 app.get("/api/recipes/search", async (req, res) => {
     const searchTerms = req.query.searchTerms as string;
     const page = parseInt(req.query.page as string);
-    const results = await RecipeAPI.searchRecipes(searchTerms, page);
+    const ranking = parseInt(req.query.ranking as string);
+    const sort = req.query.sortOption as string;
 
+    const results = await RecipeAPI.searchRecipes(searchTerms, page, ranking, sort);
     return res.json(results);
 })
 
