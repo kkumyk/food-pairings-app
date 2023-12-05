@@ -1,4 +1,6 @@
+require('dotenv').config();
 const apiKey = process.env.API_KEY;
+
 export const searchRecipes = async (searchTerms: string, page: number, ranking: number, sortOption: string) => {
     if (!apiKey) {
         throw new Error("API key not found")
