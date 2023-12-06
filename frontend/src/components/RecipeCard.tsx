@@ -1,16 +1,16 @@
 import { Recipe } from "../types"
 
 interface Props {
-    recipe: Recipe
+    recipe: Recipe;
+    onClick: () => void;
 }
 
 // create RecipeCard React component
-const RecipeCard = ({recipe}: Props) => {
+const RecipeCard = ({ recipe, onClick }: Props) => {
     return (
-        <div className="recipe-card">
-            <img src={recipe.image}></img>
+        <div className="recipe-card" onClick={onClick}>
             <div className="recipe-card-title"><h3>{recipe.title}</h3></div>
-            <div className="ingredientsCount"><h4>{recipe.usedIngredientCount}</h4></div>
+            <img src={recipe.image}></img>
         </div>
     );
 };

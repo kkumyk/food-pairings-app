@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import * as api from './api';
 import { Recipe } from "./types";
 import RecipeCard from "./components/RecipeCard";
+import RecipeModal from "./components/RecipeModal";
 
 const App = () => {
   // searchTerms will always give the most up to date value of the state object
@@ -13,7 +14,11 @@ const App = () => {
   const [searchTerms, setSearchTerms] = useState<string>(""); // beef,+tomatoes
 
   // state object
-  const [recipes, setRecipes] = useState<Recipe[]>([]); // this state hook is going to contain an array of recipes
+  // this state hook is going to contain an array of recipes
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | undefined>(
+    undefined
+  );
 
   // add event handler that is going to call our backend endpoint
   const handleSearchSubmit = async (event: FormEvent) => {
@@ -43,13 +48,10 @@ const App = () => {
         <button type="submit">Submit</button>
       </form>
 
-      {recipes.map((recipe) => (
-        // <div>
-        //   recipe image location: {recipe.image}
-        //   recipe title: {recipe.title}
-        // </div>
-        <RecipeCard recipe={recipe}/>
-      ))}
+      {recipes.map((recipe) => (<RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}/>))}
+
+
+    {selectedRecipe ? <RecipeModal /> : null}
     </div>
   );
 };
