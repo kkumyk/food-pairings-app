@@ -25,14 +25,8 @@ app.get("/api/recipes/search", async (req, res) => {
     const page = parseInt(req.query.page as string);
     const ranking = parseInt(req.query.ranking as string);
     const sort = req.query.sortOption as string;
-
     const results = await RecipeAPI.searchRecipes(searchTerms, page, ranking, sort);
-
     return res.json(results);
-
-    // return res.json(results.filter(function(el: { usedIngredientCount: number; }){
-    //     return el.usedIngredientCount > 1;
-    // }));
 })
 
 app.get("/api/recipes/:recipeId/summary", async (req, res) => {
