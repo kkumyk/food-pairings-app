@@ -47,10 +47,8 @@ const App = () => {
         ></input>
         <button type="submit">Submit</button>
       </form>
-
+      
       {recipes.map((recipe) => (<RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)} />))}
-
-
       {selectedRecipe ? (
         <RecipeModal
           recipeId={selectedRecipe.id.toString()}
