@@ -5,5 +5,11 @@ export interface Recipe {
     title: string;
     image: string;
     imageType: string;
-    usedIngredientCount: number
+    usedIngredientCount: number;
+}
+
+export interface RecipeSummary {
+    id: number;
+    title: string;
+    summary: string;
 }

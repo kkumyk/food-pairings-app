@@ -48,10 +48,15 @@ const App = () => {
         <button type="submit">Submit</button>
       </form>
 
-      {recipes.map((recipe) => (<RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}/>))}
+      {recipes.map((recipe) => (<RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)} />))}
 
 
-    {selectedRecipe ? <RecipeModal /> : null}
+      {selectedRecipe ? (
+        <RecipeModal
+          recipeId={selectedRecipe.id.toString()}
+          onClose={() => setSelectedRecipe(undefined)}
+        />
+      ) : null}
     </div>
   );
 };
