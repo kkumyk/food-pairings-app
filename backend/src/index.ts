@@ -4,7 +4,7 @@ import * as RecipeAPI from './recipe-api';
 
 /*
 Next call an endpoint from your backend
-https://api.spoonacular.com/recipes/findByIngredients?apiKey=YOUR-KEYd&ingredients=beef,tomatoes
+https://api.spoonacular.com/recipes/findByIngredients?apiKey=YOUR-KEYd&ingredients=beef,+tomatoes
 for this to happen, import the contents of the recipe-api.ts file
 */
 
@@ -27,8 +27,19 @@ app.get("/api/recipes/search", async (req, res) => {
     const sort = req.query.sortOption as string;
 
     const results = await RecipeAPI.searchRecipes(searchTerms, page, ranking, sort);
+
     return res.json(results);
+
+    // return res.json(results.filter(function(el: { usedIngredientCount: number; }){
+    //     return el.usedIngredientCount > 1;
+    // }));
 })
+
+app.get("/api/recipes/:recipeId/summary", async (req, res) => {
+    const recipeId = req.params.recipeId;
+    const results = await RecipeAPI.getRecipeSummary(recipeId);
+    return res.json(results);
+});
 
 /*
 - a function to start the app
