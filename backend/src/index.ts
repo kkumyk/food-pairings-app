@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import * as RecipeAPI from './recipe-api';
+import { PrismaClient } from "@prisma/client"
 
 /*
 Next call an endpoint from your backend
@@ -10,6 +11,8 @@ for this to happen, import the contents of the recipe-api.ts file
 
 // this line creates a new express app;
 const app = express();
+
+const prismaClient = new PrismaClient();
 
 /*
 converts the body of requests and responses we make them into json
@@ -34,6 +37,23 @@ app.get("/api/recipes/:recipeId/summary", async (req, res) => {
     const results = await RecipeAPI.getRecipeSummary(recipeId);
     return res.json(results);
 });
+
+app.post("/api/recipes/favourite", async (req, res) => {
+    const recipeId = req.body.recipeId;
+
+    try {
+        const favouriteRecipe = await prismaClient.favouriteRecipes.create({
+            data: {
+                recipeId: recipeId,
+            },
+        });
+        return res.status(201).json(favouriteRecipe);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Oops, something went wrong" });
+    }
+});
+
 
 /*
 - a function to start the app
