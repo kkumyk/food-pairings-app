@@ -5,9 +5,9 @@ import * as RecipeAPI from "../api";
 interface Props {
     recipeId: string;
     onClose: () => void;
-  }
+}
 
-const RecipeModal = ({recipeId}:Props) => {
+const RecipeModal = ({ recipeId, onClose }: Props) => {
 
     // create state object to hold the recipe data whenever we call summary endpoint
 
@@ -23,7 +23,7 @@ const RecipeModal = ({recipeId}:Props) => {
             }
         };
         fetchRecipeSummary();
-    },[recipeId]);
+    }, [recipeId]);
 
 
 
@@ -39,9 +39,8 @@ const RecipeModal = ({recipeId}:Props) => {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h2>{recipeSummary?.title}</h2>
-                        <span className="close-btn">
-                            &times;
-                        </span>
+                        {/* closes the modal: */}
+                        <span className="close-btn" onClick={onClose}> &times; </span>
                     </div>
                     <p dangerouslySetInnerHTML={{ __html: recipeSummary.summary }}></p>
                 </div>
