@@ -69,6 +69,22 @@ app.get("/api/recipes/favourite", async (req, res) => {
     }
 });
 
+app.delete("/api/recipes/favourite", async (req, res) => {
+    const recipeId = req.body.recipeId;
+
+    try {
+        await prismaClient.favouriteRecipes.delete({
+            where: {
+                recipeId: recipeId,
+            },
+        });
+        return res.status(204).send();
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Oops, something went wrong" });
+    }
+});
+
 /*
 - a function to start the app
 - the first parameter is going to be the port
