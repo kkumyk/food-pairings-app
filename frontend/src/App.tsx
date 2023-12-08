@@ -5,6 +5,8 @@ import { Recipe } from "./types";
 import RecipeCard from "./components/RecipeCard";
 import RecipeModal from "./components/RecipeModal";
 
+type Tabs = "search" | "favourites";
+
 const App = () => {
   // searchTerms will always give the most up to date value of the state object
   // setSearchTerms allows us to update searchTerms
@@ -20,6 +22,11 @@ const App = () => {
     undefined
   );
 
+  // add "Search" and "Favourites" tabs functionality to the frontend
+  // we need to know which of the tabs the user had selected
+
+  const [selectedTab, setSelectedTab] = useState<Tabs>("search");
+
   // add event handler that is going to call our backend endpoint
   const handleSearchSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -34,21 +41,38 @@ const App = () => {
   // add a UI to call your endpoint from frontend - a button that will call handleSearchSubmit function
   return (
     <div>
-      <form onSubmit={(event) => handleSearchSubmit(event)}>
 
-        <input
-          type="text"
-          required
-          placeholder="Enter two ingredients..."
+      <div className="tabs">
+        <h1 onClick={() => setSelectedTab("search")}>Food Pairing</h1>
+        <h1 onClick={() => setSelectedTab("favourites")}>Favourites</h1>
+      </div>
 
-          // set up a state hook to capture the input and to handle the change of the input
-          value={searchTerms}
-          onChange={(event) => setSearchTerms(event.target.value)}
-        ></input>
-        <button type="submit">Submit</button>
-      </form>
-        
-      {recipes.map((recipe) => (<RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)} />))}
+      {selectedTab === "search" && (<>
+
+        <form onSubmit={(event) => handleSearchSubmit(event)}>
+          <input
+            type="text"
+            required
+            placeholder="Enter two ingredients..."
+
+            // set up a state hook to capture the input and to handle the change of the input
+            value={searchTerms}
+            onChange={(event) => setSearchTerms(event.target.value)}
+          ></input>
+          <button type="submit">Submit</button>
+        </form>
+
+        {recipes.map((recipe) => (
+          <RecipeCard
+            recipe={recipe}
+            onClick={() => setSelectedRecipe(recipe)}
+          />
+        ))}
+      </>
+      )}
+
+      {selectedTab === "favourites" && <div>Favorite Food Pairing Recipes</div>}
+
       {selectedRecipe ? (
         <RecipeModal
           recipeId={selectedRecipe.id.toString()}
