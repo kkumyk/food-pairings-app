@@ -2,31 +2,42 @@
 // export your function to use in your component
 
 export const searchRecipes = async (searchTerms: string, page: number, ranking: number, sortOption: string) => {
-    const baseUrl = new URL("http://localhost:5000/api/recipes/search"); // this is where our endpoint is in our node backend; 
+  const baseUrl = new URL("http://localhost:5000/api/recipes/search"); // this is where our endpoint is in our node backend; 
 
-    // add query params
-    baseUrl.searchParams.append("searchTerms", searchTerms)
-    baseUrl.searchParams.append("page", String(page))
-    baseUrl.searchParams.append("ranking", String(ranking))
-    baseUrl.searchParams.append("sortOption", sortOption)
+  // add query params
+  baseUrl.searchParams.append("searchTerms", searchTerms)
+  baseUrl.searchParams.append("page", String(page))
+  baseUrl.searchParams.append("ranking", String(ranking))
+  baseUrl.searchParams.append("sortOption", sortOption)
 
-    // make a fetch request
-    const response = await fetch(baseUrl)
+  // make a fetch request
+  const response = await fetch(baseUrl)
 
-    if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
-    }
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`)
+  }
 
-    return response.json();
+  return response.json();
 }
 
 export const getRecipeSummary = async (recipeId: string) => {
-    const url = new URL(`http://localhost:5000/api/recipes/${recipeId}/summary`);
-    const response = await fetch(url);
-  
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-  
-    return response.json();
-  };
+  const url = new URL(`http://localhost:5000/api/recipes/${recipeId}/summary`);
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  return response.json();
+};
+
+export const getFavouriteRecipes = async () => {
+  const url = new URL("http://localhost:5000/api/recipes/favourite");
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  return response.json();
+};

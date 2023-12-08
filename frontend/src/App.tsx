@@ -1,5 +1,5 @@
 import "./App.css";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import * as api from './api';
 import { Recipe } from "./types";
 import RecipeCard from "./components/RecipeCard";
@@ -26,6 +26,23 @@ const App = () => {
   // we need to know which of the tabs the user had selected
 
   const [selectedTab, setSelectedTab] = useState<Tabs>("search");
+
+  const [favouriteRecipes, setFavoutriteRecipes] = useState<Recipe[]>([])
+
+  // since we want to load the data when the app launches, we are going to use useEffect hook
+  useEffect(() => {
+    const fetchFavouriteRecipes = async () => {
+
+      try {
+        const favouriteRecipes = await api.getFavouriteRecipes();
+        setFavoutriteRecipes(favouriteRecipes);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchFavouriteRecipes();
+  }, [])
 
   // add event handler that is going to call our backend endpoint
   const handleSearchSubmit = async (event: FormEvent) => {
@@ -71,7 +88,17 @@ const App = () => {
       </>
       )}
 
-      {selectedTab === "favourites" && <div>Favorite Food Pairing Recipes</div>}
+      {selectedTab === "favourites" && (
+        <div>
+
+          {favouriteRecipes.map((recipe) => (
+            <RecipeCard
+              recipe={recipe}
+              onClick={() => setSelectedRecipe(recipe)}
+            />
+          ))}
+        </div>
+      )}
 
       {selectedRecipe ? (
         <RecipeModal
