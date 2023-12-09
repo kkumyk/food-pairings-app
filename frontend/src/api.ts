@@ -1,6 +1,8 @@
 // create a function that will call our API search endpoint
 // export your function to use in your component
 
+import { Recipe } from "./types";
+
 export const searchRecipes = async (searchTerms: string, page: number, ranking: number, sortOption: string) => {
   const baseUrl = new URL("http://localhost:5000/api/recipes/search"); // this is where our endpoint is in our node backend; 
 
@@ -41,3 +43,23 @@ export const getFavouriteRecipes = async () => {
 
   return response.json();
 };
+
+export const addFavouriteRecipe = async (recipe: Recipe) => {
+  const url = new URL("http://localhost:5000/api/recipes/favourite");
+
+  const body = {
+    recipeId: recipe.id
+  }
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  })
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+}

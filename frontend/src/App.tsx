@@ -55,6 +55,18 @@ const App = () => {
     }
   }
 
+  const addFavouriteRecipe = async (recipe: Recipe) => {
+    try {
+      await api.addFavouriteRecipe(recipe); // adding recipe to the backend
+      // add new favourite recipe to state
+      setFavoutriteRecipes([...favouriteRecipes, recipe]) // updating the UI with the new favourite recipe
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   // add a UI to call your endpoint from frontend - a button that will call handleSearchSubmit function
   return (
     <div>
@@ -83,6 +95,7 @@ const App = () => {
           <RecipeCard
             recipe={recipe}
             onClick={() => setSelectedRecipe(recipe)}
+            onFavouriteButtonClick={addFavouriteRecipe}
           />
         ))}
       </>
@@ -95,6 +108,7 @@ const App = () => {
             <RecipeCard
               recipe={recipe}
               onClick={() => setSelectedRecipe(recipe)}
+              onFavouriteButtonClick={() => undefined}  //{addFavouriteRecipe}
             />
           ))}
         </div>
