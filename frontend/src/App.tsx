@@ -35,7 +35,7 @@ const App = () => {
 
       try {
         const favouriteRecipes = await api.getFavouriteRecipes();
-        setFavoutriteRecipes(favouriteRecipes);
+        setFavoutriteRecipes(favouriteRecipes.results);
       } catch (error) {
         console.log(error);
       }
@@ -110,4 +110,4 @@ const App = () => {
   );
 };
 
-export default App; 
+export default App;
