@@ -66,6 +66,19 @@ const App = () => {
     }
   }
 
+  const removeFavouriteRecipe = async (recipe: Recipe) => {
+    try {
+      await api.removeFavouriteRecipe(recipe); // this is the code that calls our API
+      // iterate over recipes and only return recipes that are not equal to favRecipes ids
+      const updateRecipes = favouriteRecipes.filter(
+        (favRecipe) => recipe.id !== favRecipe.id
+      );
+      // send updated array in the state
+      setFavoutriteRecipes(updateRecipes);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   // add a UI to call your endpoint from frontend - a button that will call handleSearchSubmit function
   return (
@@ -100,7 +113,7 @@ const App = () => {
             <RecipeCard
               recipe={recipe}
               onClick={() => setSelectedRecipe(recipe)}
-              onFavouriteButtonClick={addFavouriteRecipe}
+              onFavouriteButtonClick={isFavourite ? removeFavouriteRecipe : addFavouriteRecipe}
               isFavourite={isFavourite}
             />
           );
@@ -115,7 +128,7 @@ const App = () => {
             <RecipeCard
               recipe={recipe}
               onClick={() => setSelectedRecipe(recipe)}
-              onFavouriteButtonClick={() => undefined}
+              onFavouriteButtonClick={() => removeFavouriteRecipe}
               isFavourite={true}
             />
           ))}
