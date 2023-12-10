@@ -82,11 +82,23 @@ const App = () => {
 
   // add a UI to call your endpoint from frontend - a button that will call handleSearchSubmit function
   return (
-    <div>
+    <div className="app-container">
+      <div className="header">
 
+        <img src="/hero.jpg"></img>
+        <div className="title">Food Pairing App</div>
+      </div>
       <div className="tabs">
-        <h1 onClick={() => setSelectedTab("search")}>Food Pairing</h1>
-        <h1 onClick={() => setSelectedTab("favourites")}>Favourites</h1>
+        <h1
+          className={selectedTab === "search" ? "tab-active" : ""}
+          onClick={() => setSelectedTab("search")}
+        >
+          Food Pairing
+        </h1>
+
+        <h1
+          className={selectedTab === "favourites" ? "tab-active" : ""}
+          onClick={() => setSelectedTab("favourites")}>Favourites</h1>
       </div>
 
       {selectedTab === "search" && (<>
