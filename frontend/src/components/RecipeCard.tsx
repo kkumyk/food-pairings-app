@@ -23,8 +23,13 @@ const RecipeCard = ({ recipe, onClick, onFavouriteButtonClick, isFavourite }: Pr
                         < AiOutlineHeart size={25} />
                     )}
                 </span>
-                <h3>{recipe.title}</h3></div>
+                <h3>{recipe.title}</h3>
+
+            </div>
+
             <img src={recipe.image}></img>
+            
+
         </div>
     );
 };

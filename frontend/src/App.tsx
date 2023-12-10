@@ -115,29 +115,32 @@ const App = () => {
             onChange={(event) => setSearchTerms(event.target.value)}
           ></input>
           <button type="submit">
-            <AiOutlineSearch size={40}>
+            <AiOutlineSearch size={40} />
           </button>
         </form>
 
-        {recipes.map((recipe) => {
-          const isFavourite = favouriteRecipes.some(
-            (favRecipe) => recipe.id === favRecipe.id
-          );
+        <div className="recipe-grid">
 
-          return (
-            <RecipeCard
-              recipe={recipe}
-              onClick={() => setSelectedRecipe(recipe)}
-              onFavouriteButtonClick={isFavourite ? removeFavouriteRecipe : addFavouriteRecipe}
-              isFavourite={isFavourite}
-            />
-          );
-        })}
+          {recipes.map((recipe) => {
+            const isFavourite = favouriteRecipes.some(
+              (favRecipe) => recipe.id === favRecipe.id
+            );
+
+            return (
+              <RecipeCard
+                recipe={recipe}
+                onClick={() => setSelectedRecipe(recipe)}
+                onFavouriteButtonClick={isFavourite ? removeFavouriteRecipe : addFavouriteRecipe}
+                isFavourite={isFavourite}
+              />
+            );
+          })}
+        </div>
       </>
       )}
 
       {selectedTab === "favourites" && (
-        <div>
+        <div className="recipe-grid">
 
           {favouriteRecipes.map((recipe) => (
             <RecipeCard
