@@ -8,8 +8,13 @@ export interface Recipe {
     usedIngredientCount: number;
 }
 
-export interface RecipeSummary {
-    id: number;
-    title: string;
-    summary: string;
+// export interface RecipeSummary {
+//     id: number;
+//     title: string;
+//     summary: string;
+// }
+
+export interface RecipeIngredients {
+    name: string;
+    image: string;
 }
