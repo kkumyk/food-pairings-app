@@ -1,5 +1,6 @@
 import { Recipe } from "../types"
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+
 interface Props {
     recipe: Recipe;
     isFavourite: boolean;
@@ -23,13 +24,11 @@ const RecipeCard = ({ recipe, onClick, onFavouriteButtonClick, isFavourite }: Pr
                         < AiOutlineHeart size={25} />
                     )}
                 </span>
+                
                 <h3>{recipe.title}</h3>
 
             </div>
-
             <img src={recipe.image}></img>
-            
-
         </div>
     );
 };

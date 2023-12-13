@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RecipeSummary } from "../types";
+import { RecipeIngredients } from "../types";
 import * as RecipeAPI from "../api";
 
 interface Props {
@@ -10,14 +10,15 @@ interface Props {
 const RecipeModal = ({ recipeId, onClose }: Props) => {
 
     // create state object to hold the recipe data whenever we call summary endpoint
-
-    const [recipeSummary, setRecipeSummary] = useState<RecipeSummary>();
+    const [recipeSummary, getRecipeIngredients] = useState<RecipeIngredients>();
 
     useEffect(() => {
         const fetchRecipeSummary = async () => {
             try {
-                const summaryRecipe = await RecipeAPI.getRecipeSummary(recipeId);
-                setRecipeSummary(summaryRecipe);
+
+                const recipeIngredients = await RecipeAPI.getRecipeIngredients(recipeId);
+                getRecipeIngredients(recipeIngredients);
+
             } catch (error) {
                 console.log(error);
             }
@@ -25,12 +26,9 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
         fetchRecipeSummary();
     }, [recipeId]);
 
-
-
     if (!recipeSummary) {
         return <></>
     }
-
 
     return (
         <>
@@ -38,11 +36,13 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
             <div className="modal">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h2>{recipeSummary?.title}</h2>
+
+                        <h2>{recipeSummary?.name}</h2>
                         {/* closes the modal: */}
                         <span className="close-btn" onClick={onClose}> &times; </span>
                     </div>
-                    <p dangerouslySetInnerHTML={{ __html: recipeSummary.summary }}></p>
+
+                    <p> {recipeSummary?.image} </p>
                 </div>
             </div>
         </>
@@ -50,3 +50,4 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
 };
 
 export default RecipeModal;
+
