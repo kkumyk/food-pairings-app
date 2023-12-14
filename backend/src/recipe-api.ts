@@ -11,7 +11,7 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
     const queryParams = {
         apiKey: apiKey,
         ingredients: searchTerms,
-        number: "99",
+        number: "3",
         ranking: "1",
         sort: "max-used-ingredients",
     }
