@@ -23,27 +23,27 @@ const App = () => {
     undefined
   );
 
-  // // add "Search" and "Favourites" tabs functionality to the frontend
-  // // we need to know which of the tabs the user had selected
+  // add "Search" and "Favourites" tabs functionality to the frontend
+  // we need to know which of the tabs the user had selected
 
   const [selectedTab, setSelectedTab] = useState<Tabs>("search");
 
-  // const [favouriteRecipes, setFavoutriteRecipes] = useState<Recipe[]>([])
+  const [favouriteRecipes, setFavoutriteRecipes] = useState<Recipe[]>([])
 
-  // // since we want to load the data when the app launches, we are going to use useEffect hook
-  // useEffect(() => {
-  //   const fetchFavouriteRecipes = async () => {
+  // since we want to load the data when the app launches, we are going to use useEffect hook
+  useEffect(() => {
+    const fetchFavouriteRecipes = async () => {
 
-  //     try {
-  //       const favouriteRecipes = await api.getFavouriteRecipes();
-  //       setFavoutriteRecipes(favouriteRecipes.results);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
+      try {
+        const favouriteRecipes = await api.getFavouriteRecipes();
+        setFavoutriteRecipes(favouriteRecipes.results);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-  //   fetchFavouriteRecipes();
-  // }, [])
+    fetchFavouriteRecipes();
+  }, [])
 
   // add event handler that is going to call our backend endpoint
   const handleSearchSubmit = async (event: FormEvent) => {
@@ -56,30 +56,30 @@ const App = () => {
     }
   }
 
-  // const addFavouriteRecipe = async (recipe: Recipe) => {
-  //   try {
-  //     await api.addFavouriteRecipe(recipe); // adding recipe to the backend
-  //     // add new favourite recipe to state
-  //     setFavoutriteRecipes([...favouriteRecipes, recipe]) // updating the UI with the new favourite recipe
+  const addFavouriteRecipe = async (recipe: Recipe) => {
+    try {
+      await api.addFavouriteRecipe(recipe); // adding recipe to the backend
+      // add new favourite recipe to state
+      setFavoutriteRecipes([...favouriteRecipes, recipe]) // updating the UI with the new favourite recipe
 
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  // const removeFavouriteRecipe = async (recipe: Recipe) => {
-  //   try {
-  //     await api.removeFavouriteRecipe(recipe); // this is the code that calls our API
-  //     // iterate over recipes and only return recipes that are not equal to favRecipes ids
-  //     const updateRecipes = favouriteRecipes.filter(
-  //       (favRecipe) => recipe.id !== favRecipe.id
-  //     );
-  //     // send updated array in the state
-  //     setFavoutriteRecipes(updateRecipes);
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+  const removeFavouriteRecipe = async (recipe: Recipe) => {
+    try {
+      await api.removeFavouriteRecipe(recipe); // this is the code that calls our API
+      // iterate over recipes and only return recipes that are not equal to favRecipes ids
+      const updateRecipes = favouriteRecipes.filter(
+        (favRecipe) => recipe.id !== favRecipe.id
+      );
+      // send updated array in the state
+      setFavoutriteRecipes(updateRecipes);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   // add a UI to call your endpoint from frontend - a button that will call handleSearchSubmit function
   return (
@@ -119,34 +119,29 @@ const App = () => {
           </button>
         </form>
 
-
         <div className="recipe-grid">
 
+          {recipes.map((recipe) => {
+            const isFavourite = favouriteRecipes.some(
+              (favRecipe) => recipe.id === favRecipe.id
+            );
 
-
-          {/* 
-          // {  const isFavourite = favouriteRecipes.some(
-          //     (favRecipe) => recipe.id === favRecipe.id
-          //   );
-          //   return (
-          //     <RecipeCard
-          //       recipe={recipe}
-          //       onClick={() => setSelectedRecipe(recipe)}
-          //       onFavouriteButtonClick={isFavourite ? removeFavouriteRecipe : addFavouriteRecipe}
-          //       isFavourite={isFavourite}
-          //     />
-          //   );
-          // }
-          //)} */}
-
+            return (
+              <RecipeCard
+                recipe={recipe}
+                onClick={() => setSelectedRecipe(recipe)}
+                onFavouriteButtonClick={isFavourite ? removeFavouriteRecipe : addFavouriteRecipe}
+                isFavourite={isFavourite}
+              />
+            );
+          })}
         </div>
-
-
       </>
       )}
 
-      {/* {selectedTab === "favourites" && (
+      {selectedTab === "favourites" && (
         <div className="recipe-grid">
+
           {favouriteRecipes.map((recipe) => (
             <RecipeCard
               recipe={recipe}
@@ -156,7 +151,7 @@ const App = () => {
             />
           ))}
         </div>
-      )} */}
+      )}
 
       {selectedRecipe ? (
         <RecipeModal

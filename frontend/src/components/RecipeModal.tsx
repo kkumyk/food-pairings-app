@@ -6,43 +6,32 @@ interface Props {
     recipeId: string;
     onClose: () => void;
 }
-
 const RecipeModal = ({ recipeId, onClose }: Props) => {
-
-    // create state object to hold the recipe data whenever we call summary endpoint
-    const [recipeSummary, getRecipeIngredients] = useState<RecipeIngredients>();
+    // create state object to hold the recipe data whenever we call INGREDIENTS endpoint
+    const [recipeIngredients, getRecipeIngredients] = useState<RecipeIngredients>();
 
     useEffect(() => {
-        const fetchRecipeSummary = async () => {
+        const fetchRecipeIngredients = async () => {
             try {
-
                 const recipeIngredients = await RecipeAPI.getRecipeIngredients(recipeId);
                 getRecipeIngredients(recipeIngredients);
-
-            } catch (error) {
-                console.log(error);
-            }
+            } catch (error) { console.log(error); }
         };
-        fetchRecipeSummary();
+        fetchRecipeIngredients();
     }, [recipeId]);
-
-    if (!recipeSummary) {
+    if (!recipeIngredients) {
         return <></>
     }
-
     return (
         <>
             <div className="overlay"></div>
             <div className="modal">
                 <div className="modal-content">
                     <div className="modal-header">
-
-                        <h2>{recipeSummary?.name}</h2>
-                        {/* closes the modal: */}
+                        <h2>Ingredients List</h2>
                         <span className="close-btn" onClick={onClose}> &times; </span>
                     </div>
-
-                    <p> {recipeSummary?.image} </p>
+                    <h3>{recipeIngredients.ingredients}</h3>
                 </div>
             </div>
         </>

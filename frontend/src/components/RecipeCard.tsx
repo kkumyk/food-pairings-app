@@ -15,7 +15,7 @@ const RecipeCard = ({ recipe, onClick, onFavouriteButtonClick, isFavourite }: Pr
             <div className="recipe-card-title">
 
                 <span onClick={(event) => {
-                    event.stopPropagation()
+                    event.stopPropagation();
                     onFavouriteButtonClick(recipe);
                 }}>
                     {isFavourite ? (

@@ -41,59 +41,53 @@ app.get("/api/recipes/:recipeId/ingredients", async (req, res) => {
     return res.json(results);
 });
 
+app.post("/api/recipes/favourite", async (req, res) => {
+    const recipeId = req.body.recipeId;
 
-// app.get("/api/recipes/:recipeId/summary", async (req, res) => {
-//     const recipeId = req.params.recipeId;
-//     const results = await RecipeAPI.getRecipeSummary(recipeId);
-//     return res.json(results);
-// });
+    try {
+        const favouriteRecipe = await prismaClient.favouriteRecipes.create({
+            data: {
+                recipeId: recipeId, // take recipe id from the endpoint
+            },
+        });
+        return res.status(201).json(favouriteRecipe);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Oops, something went wrong" });
+    }
+});
 
-// app.post("/api/recipes/favourite", async (req, res) => {
-//     const recipeId = req.body.recipeId;
+app.get("/api/recipes/favourite", async (req, res) => {
 
-//     try {
-//         const favouriteRecipe = await prismaClient.favouriteRecipes.create({
-//             data: {
-//                 recipeId: recipeId, // take recipe id from the endpoint
-//             },
-//         });
-//         return res.status(201).json(favouriteRecipe);
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(500).json({ error: "Oops, something went wrong" });
-//     }
-// });
+    try {
+        const recipes = await prismaClient.favouriteRecipes.findMany();
+        const recipeIds = recipes.map((recipe) => recipe.recipeId.toString());
 
-// app.get("/api/recipes/favourite", async (req, res) => {
-//     try {
-//         const recipes = await prismaClient.favouriteRecipes.findMany();
-//         const recipeIds = recipes.map((recipe) => recipe.recipeId.toString());
+        const favourites = await RecipeAPI.getFavouriteRecipesByIDs(recipeIds);
 
-//         const favourites = await RecipeAPI.getFavouriteRecipesByIDs(recipeIds);
-
-//         return res.json(favourites);
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(500).json({ error: "Oops, something went wrong" });
-//     }
-// });
+        return res.json(favourites);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Oops, something went wrong" });
+    }
+});
 
 
-// app.delete("/api/recipes/favourite", async (req, res) => {
-//     const recipeId = req.body.recipeId;
+app.delete("/api/recipes/favourite", async (req, res) => {
+    const recipeId = req.body.recipeId;
 
-//     try {
-//         await prismaClient.favouriteRecipes.delete({
-//             where: {
-//                 recipeId: recipeId,
-//             },
-//         });
-//         return res.status(204).send();
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(500).json({ error: "Oops, something went wrong" });
-//     }
-// });
+    try {
+        await prismaClient.favouriteRecipes.delete({
+            where: {
+                recipeId: recipeId,
+            },
+        });
+        return res.status(204).send();
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Oops, something went wrong" });
+    }
+});
 
 /*
 - a function to start the app
