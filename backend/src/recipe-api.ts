@@ -31,6 +31,33 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
     }
 };
 
+// export const getRecipeIngredients = async (recipeId: string) => {
+//     if (!apiKey) {
+//         throw new Error("API Key not found");
+//     }
+//     const url = new URL(
+//         `https://api.spoonacular.com/recipes/${recipeId}/ingredientWidget.json`
+//     );
+//     const params = {
+//         apiKey: apiKey,
+//     };
+//     url.search = new URLSearchParams(params).toString();
+//     const response = await fetch(url);
+//     const json = await response.json() as Object;
+
+//     let ing = Object.values(json).flat();
+
+//     let test: Array<string> = []
+
+//     if (Array.isArray(ing)) {
+//         ing.filter(i => test.push(i.name));
+//         console.log(test.join(", "))
+//         return { ingredients: test.join(", ") };
+//     } else {
+//         return ing;
+//     }
+// };
+
 export const getRecipeIngredients = async (recipeId: string) => {
     if (!apiKey) {
         throw new Error("API Key not found");
@@ -45,19 +72,30 @@ export const getRecipeIngredients = async (recipeId: string) => {
     const response = await fetch(url);
     const json = await response.json() as Object;
 
-    let ing = Object.values(json).flat();
+    let ingredientsResults = Object.values(json).flat();
 
-    let test: Array<string> = []
+    let ingredientsNames: Array<string> = []; // define type for extracted results and initialise it with an empty array;
 
-    if (Array.isArray(ing)) {
-        ing.filter(i => test.push(i.name));
-        console.log(test.join(", "))
-        return { ingredients: test.join(", ") };
+    // TODO 1: properly annotate type for names results and remove the if condition
+    // TODO 2: optimise favs and ingredients API calls so that they are only called once instead of twice as currently are;
+    /* TODO 3:
+    extract unit & value for each ingredient and return them on separate lines
+        "amount": {
+        "metric": {
+            "unit": "g",
+            "value": 222.0
+        }
+    */
+    if (Array.isArray(ingredientsResults)) {
+        ingredientsResults.filter(i => ingredientsNames.push(i.name));
+        // console.log(ingredientsNames.join(", "))
+        return { ingredients: ingredientsNames.join(", ") };
     } else {
-        return ing;
+        return ingredientsResults;
     }
 };
 
+// TODO 4: add function to remove the favourite recipes from the favourite tab as well;
 
 export const getFavouriteRecipesByIDs = async (ids: string[]) => {
     if (!apiKey) {
