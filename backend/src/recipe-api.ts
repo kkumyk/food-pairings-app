@@ -74,8 +74,11 @@ export const getRecipeIngredients = async (recipeId: string) => {
 
     let ingredientsResults = Object.values(json).flat();
 
-    let ingredientsNames: Array<string> = []; // define type for extracted results and initialise it with an empty array;
+    // define type for extracted results and initialise it with an empty array;
+    let ingredientsNames: Array<string> = [];
 
+    // disable strict mode in React
+    
     // TODO 1: properly annotate type for names results and remove the if condition
     // TODO 2: optimise favs and ingredients API calls so that they are only called once instead of twice as currently are;
     /* TODO 3:
