@@ -8,8 +8,8 @@ interface Props {
 }
 const RecipeModal = ({ recipeId, onClose }: Props) => {
     // create state object to hold the recipe data whenever we call INGREDIENTS endpoint
-    const [recipeIngredients, getRecipeIngredients] = useState<RecipeIngredients[]>([]);
-   
+    const [recipeIngredients, getRecipeIngredients] = useState<RecipeIngredients[]>();
+
     useEffect(() => {
         const fetchRecipeIngredients = async () => {
             try {
@@ -31,10 +31,11 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
                         <h2>Ingredients List</h2>
                         <span className="close-btn" onClick={onClose}> &times; </span>
                     </div>
-
-                    {recipeIngredients.map((ingredient) => (
-                        <h3>{[ingredient.name]}</h3>
-                    ))}
+                    <div className="modal-content">
+                        {recipeIngredients.map((ingredient) => (
+                            <h3>{[ingredient.name]}</h3>
+                        ))}
+                    </div>
                 </div>
             </div>
         </>
