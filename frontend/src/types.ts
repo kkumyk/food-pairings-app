@@ -8,6 +8,5 @@ export interface Recipe {
     usedIngredientCount: number;
 }
 
-export interface RecipeIngredients {
-    ingredients: string;
-}
+
+export interface RecipeIngredients { name: string; }[];

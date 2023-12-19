@@ -31,33 +31,6 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
     }
 };
 
-// export const getRecipeIngredients = async (recipeId: string) => {
-//     if (!apiKey) {
-//         throw new Error("API Key not found");
-//     }
-//     const url = new URL(
-//         `https://api.spoonacular.com/recipes/${recipeId}/ingredientWidget.json`
-//     );
-//     const params = {
-//         apiKey: apiKey,
-//     };
-//     url.search = new URLSearchParams(params).toString();
-//     const response = await fetch(url);
-//     const json = await response.json() as Object;
-
-//     let ing = Object.values(json).flat();
-
-//     let test: Array<string> = []
-
-//     if (Array.isArray(ing)) {
-//         ing.filter(i => test.push(i.name));
-//         console.log(test.join(", "))
-//         return { ingredients: test.join(", ") };
-//     } else {
-//         return ing;
-//     }
-// };
-
 export const getRecipeIngredients = async (recipeId: string) => {
     if (!apiKey) {
         throw new Error("API Key not found");
@@ -70,32 +43,11 @@ export const getRecipeIngredients = async (recipeId: string) => {
     };
     url.search = new URLSearchParams(params).toString();
     const response = await fetch(url);
-    const json = await response.json() as Object;
-
-    let ingredientsResults = Object.values(json).flat();
-
-    // define type for extracted results and initialise it with an empty array;
-    let ingredientsNames: Array<string> = [];
-    
-    // TODO 1: properly annotate type for names results and remove the if condition
-    /* TODO 2:
-    extract unit & value for each ingredient and return them on separate lines
-        "amount": {
-        "metric": {
-            "unit": "g",
-            "value": 222.0
-        }
-    */
-    if (Array.isArray(ingredientsResults)) {
-        ingredientsResults.filter(i => ingredientsNames.push(i.name));
-        // console.log(ingredientsNames.join(", "))
-        return { ingredients: ingredientsNames.join(", ") };
-    } else {
-        return ingredientsResults;
-    }
+    const ingredientsObject = await response.json();
+    return ingredientsObject;
 };
 
-// TODO 4: add function to remove the favourite recipes from the favourite tab as well;
+// TODO: add function to remove the favourite recipes from the favourite tab as well;
 
 export const getFavouriteRecipesByIDs = async (ids: string[]) => {
     if (!apiKey) {
