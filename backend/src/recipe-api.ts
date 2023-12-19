@@ -5,13 +5,12 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
     if (!apiKey) {
         throw new Error("API key not found")
     }
-    // base URL
-    const url = new URL("https://api.spoonacular.com/recipes/findByIngredients");
+    const url = new URL("https://api.spoonacular.com/recipes/findByIngredients"); // base URL
 
     const queryParams = {
         apiKey: apiKey,
         ingredients: searchTerms,
-        number: "3",
+        number: "1",
         ranking: "1",
         sort: "max-used-ingredients",
     }
@@ -32,25 +31,23 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
     }
 };
 
-export const getRecipeSummary = async (recipeId: string) => {
+export const getRecipeIngredients = async (recipeId: string) => {
     if (!apiKey) {
         throw new Error("API Key not found");
     }
-
     const url = new URL(
-        `https://api.spoonacular.com/recipes/${recipeId}/summary`
+        `https://api.spoonacular.com/recipes/${recipeId}/ingredientWidget.json`
     );
     const params = {
         apiKey: apiKey,
     };
     url.search = new URLSearchParams(params).toString();
-
     const response = await fetch(url);
-    const json = await response.json();
-
-    return json;
+    const ingredientsObject = await response.json();
+    return ingredientsObject;
 };
 
+// TODO: add function to remove the favourite recipes from the favourite tab as well;
 
 export const getFavouriteRecipesByIDs = async (ids: string[]) => {
     if (!apiKey) {

@@ -17,7 +17,7 @@ const App = () => {
   const [searchTerms, setSearchTerms] = useState<string>(""); // beef,+tomatoes
 
   // state object
-  // this state hook is going to contain an array of recipes
+  // this uS hook is going to contain an array of recipes
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | undefined>(
     undefined
@@ -25,12 +25,11 @@ const App = () => {
 
   // add "Search" and "Favourites" tabs functionality to the frontend
   // we need to know which of the tabs the user had selected
-
   const [selectedTab, setSelectedTab] = useState<Tabs>("search");
-
   const [favouriteRecipes, setFavoutriteRecipes] = useState<Recipe[]>([])
 
-  // since we want to load the data when the app launches, we are going to use useEffect hook
+
+  // since we want to load the data when the app launches, we are going to use uE hook
   useEffect(() => {
     const fetchFavouriteRecipes = async () => {
 
@@ -85,7 +84,6 @@ const App = () => {
   return (
     <div className="app-container">
       <div className="header">
-
         <img src="/hero.jpg"></img>
         <div className="title">Food Pairing App</div>
       </div>
@@ -109,9 +107,11 @@ const App = () => {
             type="text"
             required
             placeholder="Enter two ingredients..."
-
             // set up a state hook to capture the input and to handle the change of the input
             value={searchTerms}
+            // onChange method is a callback function which takes the event and
+            // sets the searchTerms value to event.target.value meaning it will
+            // take any type of value typed inside the input field and assigned it to sSTfield
             onChange={(event) => setSearchTerms(event.target.value)}
           ></input>
           <button type="submit">

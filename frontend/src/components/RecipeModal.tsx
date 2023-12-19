@@ -1,48 +1,41 @@
 import { useEffect, useState } from "react";
-import { RecipeSummary } from "../types";
+import { RecipeIngredients } from "../types";
 import * as RecipeAPI from "../api";
 
 interface Props {
     recipeId: string;
     onClose: () => void;
 }
-
 const RecipeModal = ({ recipeId, onClose }: Props) => {
-
-    // create state object to hold the recipe data whenever we call summary endpoint
-
-    const [recipeSummary, setRecipeSummary] = useState<RecipeSummary>();
+    // create state object to hold the recipe data whenever we call INGREDIENTS endpoint
+    const [recipeIngredients, getRecipeIngredients] = useState<RecipeIngredients[]>();
 
     useEffect(() => {
-        const fetchRecipeSummary = async () => {
+        const fetchRecipeIngredients = async () => {
             try {
-                const summaryRecipe = await RecipeAPI.getRecipeSummary(recipeId);
-                setRecipeSummary(summaryRecipe);
-            } catch (error) {
-                console.log(error);
-            }
+                const recipeIngredients = await RecipeAPI.getRecipeIngredients(recipeId);
+                getRecipeIngredients(recipeIngredients.ingredients);
+            } catch (error) { console.log(error); }
         };
-        fetchRecipeSummary();
+        fetchRecipeIngredients();
     }, [recipeId]);
-
-
-
-    if (!recipeSummary) {
+    if (!recipeIngredients) {
         return <></>
     }
-
-
     return (
         <>
             <div className="overlay"></div>
             <div className="modal">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h2>{recipeSummary?.title}</h2>
-                        {/* closes the modal: */}
+                        <h2>Ingredients List</h2>
                         <span className="close-btn" onClick={onClose}> &times; </span>
                     </div>
-                    <p dangerouslySetInnerHTML={{ __html: recipeSummary.summary }}></p>
+                    <div className="modal-content">
+                        {recipeIngredients.map((ingredient) => (
+                            <h3>{[ingredient.name]}</h3>
+                        ))}
+                    </div>
                 </div>
             </div>
         </>
@@ -50,3 +43,4 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
 };
 
 export default RecipeModal;
+
