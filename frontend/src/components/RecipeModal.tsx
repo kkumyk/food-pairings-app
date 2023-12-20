@@ -30,12 +30,9 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
         };
         fetchRecipeInformation();
     }, [recipeId]);
-    if (!recipeIngredients || !recipeInstructions) {
+    if (!recipeInfo || !recipeIngredients || !recipeInstructions) {
         return <></>
     }
-    // else if(!recipeInstructions) {
-    //     return <></>
-    // }
     return (
         <>
             <div className="overlay"></div>
@@ -47,9 +44,7 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
                         <span className="close-btn" onClick={onClose}> &times; </span>
                     </div>
 
-
                     {recipeIngredients.map((ingredient) => (
-
                         <div>
                             <img src={`https://spoonacular.com/cdn/ingredients_100x100/` + ingredient.image} alt=""></img>
                             <h3>{[ingredient.name]}</h3>
@@ -57,10 +52,7 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
                                 {ingredient.amount} {ingredient.unit}
                             </p>
                         </div>
-
                     ))}
-
-
 
                     <div className="modal-instructions">
                         <h2>Instructions</h2>
