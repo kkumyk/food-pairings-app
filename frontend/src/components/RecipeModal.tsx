@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RecipeIngredients } from "../types";
+import { RecipeIngredients, RecipeInfo, RecipeInstructions } from "../types";
 import * as RecipeAPI from "../api";
 
 interface Props {
@@ -8,34 +8,54 @@ interface Props {
 }
 const RecipeModal = ({ recipeId, onClose }: Props) => {
     // create state object to hold the recipe data whenever we call INGREDIENTS endpoint
-    const [recipeIngredients, getRecipeInformation] = useState<RecipeIngredients[]>();
+    const [recipeInfo, getRecipeInfo] = useState<RecipeInfo>();
+    const [recipeIngredients, getRecipeIngredients] = useState<RecipeIngredients[]>();
+    const [recipeInstructions, getRecipeInstructions] = useState<RecipeInstructions[]>();
+
 
     useEffect(() => {
-        const fetchRecipeIngredients = async () => {
+        const fetchRecipeInformation = async () => {
             try {
-                const recipeIngredients = await RecipeAPI.getRecipeInformation(recipeId);
-                getRecipeInformation(recipeIngredients.extendedIngredients);
+                const recipeInfo = await RecipeAPI.getRecipeInformation(recipeId);
+                getRecipeInfo(recipeInfo);
+
+                const recipeIngredients = recipeInfo.extendedIngredients;
+                getRecipeIngredients(recipeIngredients);
+
+                const recipeInstructions = recipeInfo.analyzedInstructions;
+                console.log(recipeInstructions)
+                getRecipeInstructions(recipeInstructions[0].steps);
+
             } catch (error) { console.log(error); }
         };
-        fetchRecipeIngredients();
+        fetchRecipeInformation();
     }, [recipeId]);
-    if (!recipeIngredients) {
+    if (!recipeIngredients || !recipeInstructions) {
         return <></>
-    }
+    } 
+    // else if(!recipeInstructions) {
+    //     return <></>
+    // }
     return (
         <>
             <div className="overlay"></div>
             <div className="modal">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h2>Ingredients List</h2>
+                        <h2>Ingredients</h2>
                         <span className="close-btn" onClick={onClose}> &times; </span>
                     </div>
-                    <div className="modal-content">
-                        {recipeIngredients.map((ingredient) => (
-                            <h3>{[ingredient.name]}</h3>
-                        ))}
-                    </div>
+
+                    {recipeIngredients.map((ingredient) => (
+                        <p>{[ingredient.name]}</p>
+                    ))}
+
+                    <div><h2>Instructions</h2></div>
+
+                    {recipeInstructions.map((steps) => (
+                        <p>{[<li>{steps.step}</li>]}</p>
+                    ))}
+
                 </div>
             </div>
         </>

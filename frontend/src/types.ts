@@ -9,4 +9,17 @@ export interface Recipe {
 }
 
 
-export interface RecipeIngredients { name: string; }[];
+export interface RecipeIngredients {
+    name: string;
+}[];
+
+
+export interface RecipeInstructions {
+    step: string;
+}[];
+
+
+export interface RecipeInfo {
+    ingredients: RecipeIngredients;
+    instructions: RecipeInstructions;
+}
