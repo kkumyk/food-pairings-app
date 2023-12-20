@@ -15,6 +15,10 @@ const app = express();
 // http://localhost:5000/api/recipes/search?searchTerms=beef,+tomatoes&page=1&ranking=1&sort=max-used-ingredients&number=1
 // http://localhost:5000/api/recipes/646572/ingredients
 
+// http://localhost:5000/api/recipes/716429/information?includeNutrition=false
+
+// https://api.spoonacular.com/recipes/716429/information?includeNutrition=false
+
 const prismaClient = new PrismaClient();
 
 /*
@@ -35,11 +39,21 @@ app.get("/api/recipes/search", async (req, res) => {
     return res.json(results);
 })
 
-app.get("/api/recipes/:recipeId/ingredients", async (req, res) => {
+// app.get("/api/recipes/:recipeId/ingredients", async (req, res) => {
+//     const recipeId = req.params.recipeId;
+//     const results = await RecipeAPI.getRecipeIngredients(recipeId);
+//     return res.json(results);
+// });
+
+
+app.get("/api/recipes/:recipeId/information", async (req, res) => {
     const recipeId = req.params.recipeId;
-    const results = await RecipeAPI.getRecipeIngredients(recipeId);
+    const results = await RecipeAPI.getRecipeInformation(recipeId);
     return res.json(results);
 });
+
+
+
 
 app.post("/api/recipes/favourite", async (req, res) => {
     const recipeId = req.body.recipeId;

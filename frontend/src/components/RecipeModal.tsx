@@ -8,13 +8,13 @@ interface Props {
 }
 const RecipeModal = ({ recipeId, onClose }: Props) => {
     // create state object to hold the recipe data whenever we call INGREDIENTS endpoint
-    const [recipeIngredients, getRecipeIngredients] = useState<RecipeIngredients[]>();
+    const [recipeIngredients, getRecipeInformation] = useState<RecipeIngredients[]>();
 
     useEffect(() => {
         const fetchRecipeIngredients = async () => {
             try {
-                const recipeIngredients = await RecipeAPI.getRecipeIngredients(recipeId);
-                getRecipeIngredients(recipeIngredients.ingredients);
+                const recipeIngredients = await RecipeAPI.getRecipeInformation(recipeId);
+                getRecipeInformation(recipeIngredients.extendedIngredients);
             } catch (error) { console.log(error); }
         };
         fetchRecipeIngredients();

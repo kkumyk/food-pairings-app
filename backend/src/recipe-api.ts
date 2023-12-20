@@ -31,21 +31,39 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
     }
 };
 
-export const getRecipeIngredients = async (recipeId: string) => {
+// export const getRecipeIngredients = async (recipeId: string) => {
+//     if (!apiKey) {
+//         throw new Error("API Key not found");
+//     }
+//     const url = new URL(
+//         `https://api.spoonacular.com/recipes/${recipeId}/ingredientWidget.json`
+//     );
+//     const params = {
+//         apiKey: apiKey,
+//     };
+//     url.search = new URLSearchParams(params).toString();
+//     const response = await fetch(url);
+//     const ingredientsObject = await response.json();
+//     return ingredientsObject;
+// };
+
+export const getRecipeInformation = async (recipeId: string) => {
     if (!apiKey) {
         throw new Error("API Key not found");
     }
     const url = new URL(
-        `https://api.spoonacular.com/recipes/${recipeId}/ingredientWidget.json`
+        `https://api.spoonacular.com/recipes/${recipeId}/information?includeNutrition=false`
     );
     const params = {
         apiKey: apiKey,
     };
     url.search = new URLSearchParams(params).toString();
     const response = await fetch(url);
-    const ingredientsObject = await response.json();
-    return ingredientsObject;
+    const informationObject = await response.json();
+    return informationObject;
 };
+
+
 
 // TODO: add function to remove the favourite recipes from the favourite tab as well;
 

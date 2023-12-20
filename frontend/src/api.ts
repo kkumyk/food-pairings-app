@@ -16,8 +16,8 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
   return response.json();
 }
 
-export const getRecipeIngredients = async (recipeId: string) => {
-  const url = new URL(`http://localhost:5000/api/recipes/${recipeId}/ingredients`);
+export const getRecipeInformation = async (recipeId: string) => {
+  const url = new URL(`http://localhost:5000/api/recipes/${recipeId}/information?includeNutrition=false`);
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
