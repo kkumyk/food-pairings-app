@@ -32,7 +32,7 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
     }, [recipeId]);
     if (!recipeIngredients || !recipeInstructions) {
         return <></>
-    } 
+    }
     // else if(!recipeInstructions) {
     //     return <></>
     // }
@@ -45,16 +45,18 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
                         <h2>Ingredients</h2>
                         <span className="close-btn" onClick={onClose}> &times; </span>
                     </div>
-
                     {recipeIngredients.map((ingredient) => (
                         <p>{[ingredient.name]}</p>
                     ))}
 
-                    <div><h2>Instructions</h2></div>
-
-                    {recipeInstructions.map((steps) => (
-                        <p>{[<li>{steps.step}</li>]}</p>
-                    ))}
+                    <div className="modal-instructions">
+                        <h2>Instructions</h2>
+                        <ol>
+                            {recipeInstructions.map((steps) => (
+                                <p>{[<li>{steps.step}</li>]}</p>
+                            ))}
+                        </ol>
+                    </div>
 
                 </div>
             </div>

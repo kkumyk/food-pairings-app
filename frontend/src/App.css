@@ -133,6 +133,19 @@ button {
   padding: 2em;
   border-radius: 4px;
   max-width: 500px;
+  color: #6e686b;
+}
+
+.modal-instructions {
+  color: #6e686b;
+}
+
+.modal-instructions ol {
+  margin-left: 0px;
+}
+
+.modal-instructions li {
+  margin: 10px 0px;
 }
 
 .tabs {
