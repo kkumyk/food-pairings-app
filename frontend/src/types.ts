@@ -11,6 +11,9 @@ export interface Recipe {
 
 export interface RecipeIngredients {
     name: string;
+    image: string;
+    unit: string;
+    amount:number;
 }[];
 
 

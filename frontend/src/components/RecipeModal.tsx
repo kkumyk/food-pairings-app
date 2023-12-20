@@ -41,13 +41,26 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
             <div className="overlay"></div>
             <div className="modal">
                 <div className="modal-content">
+
                     <div className="modal-header">
                         <h2>Ingredients</h2>
                         <span className="close-btn" onClick={onClose}> &times; </span>
                     </div>
+
+
                     {recipeIngredients.map((ingredient) => (
-                        <p>{[ingredient.name]}</p>
+
+                        <div>
+                            <img src={`https://spoonacular.com/cdn/ingredients_100x100/` + ingredient.image} alt=""></img>
+                            <h3>{[ingredient.name]}</h3>
+                            <p>
+                                {ingredient.amount} {ingredient.unit}
+                            </p>
+                        </div>
+
                     ))}
+
+
 
                     <div className="modal-instructions">
                         <h2>Instructions</h2>
