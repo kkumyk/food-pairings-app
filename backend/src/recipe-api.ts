@@ -10,7 +10,7 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
     const queryParams = {
         apiKey: apiKey,
         ingredients: searchTerms,
-        number: "1",
+        number: "5",
         ranking: "1",
         sort: "max-used-ingredients",
     }
@@ -30,22 +30,6 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
         console.log(error);
     }
 };
-
-// export const getRecipeIngredients = async (recipeId: string) => {
-//     if (!apiKey) {
-//         throw new Error("API Key not found");
-//     }
-//     const url = new URL(
-//         `https://api.spoonacular.com/recipes/${recipeId}/ingredientWidget.json`
-//     );
-//     const params = {
-//         apiKey: apiKey,
-//     };
-//     url.search = new URLSearchParams(params).toString();
-//     const response = await fetch(url);
-//     const ingredientsObject = await response.json();
-//     return ingredientsObject;
-// };
 
 export const getRecipeInformation = async (recipeId: string) => {
     if (!apiKey) {
