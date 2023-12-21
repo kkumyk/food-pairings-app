@@ -17,7 +17,7 @@ body {
 }
 
 .tab-active {
-  border-bottom: 4px rgb(202, 129, 2) solid;
+  border-bottom: 4px rgb(92, 165, 65) solid;
   padding-bottom: 0.5em;
 }
 
@@ -42,6 +42,7 @@ button {
   background-color: white;
   border: none;
   cursor: pointer;
+  color: #6e686b;
 }
 
 .recipe-grid {
@@ -176,10 +177,12 @@ button {
   display: flex;
   gap: 2em;
   cursor: pointer;
+  color: #6e686b;
 }
 
 .recipe-card-title {
   display: flex;
   align-items: center;
   gap: 0.5em;
+  color: #6e686b;
 }

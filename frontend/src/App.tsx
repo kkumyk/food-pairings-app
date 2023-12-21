@@ -92,7 +92,7 @@ const App = () => {
           className={selectedTab === "search" ? "tab-active" : ""}
           onClick={() => setSelectedTab("search")}
         >
-          Food Pairing
+          Food Pairings
         </h1>
 
         <h1
