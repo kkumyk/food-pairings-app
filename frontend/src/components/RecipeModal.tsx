@@ -36,7 +36,6 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
     return (
         <>
             <div className="overlay"></div>
-
             <div className="modal">
                 <div className="modal-content">
 
@@ -51,18 +50,17 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
                             <div className="modal-ingredient">
 
                                 <div className="modal-images">
-                                    <img
-                                        className="ingredient-image" src={`https://spoonacular.com/cdn/ingredients_100x100/` + ingredient.image} alt="">
-                                    </img>
+                                    <img className="ingredient-image" src={`https://spoonacular.com/cdn/ingredients_100x100/` + ingredient.image} alt=""></img>
+                                </div>
+                                
+                                <div className="ingredient-name">
+                                    <h3>{[ingredient.name]}</h3>
+                                    <p>{ingredient.amount} {ingredient.unit}</p>
                                 </div>
 
-                                <h3>{[ingredient.name]}</h3>
-                                <p>{ingredient.amount} {ingredient.unit}</p>
                             </div>
-
                         ))}
                     </div>
-
 
                     <div className="modal-instructions">
                         <h2>Instructions</h2>

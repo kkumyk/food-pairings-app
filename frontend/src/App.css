@@ -168,6 +168,10 @@ button {
   border-radius: 20px;
 }
 
+.ingredient-name {
+  margin-left: 50px;
+}
+
 .tabs {
   display: flex;
   gap: 2em;
