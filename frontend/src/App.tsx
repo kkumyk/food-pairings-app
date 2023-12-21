@@ -85,7 +85,7 @@ const App = () => {
     <div className="app-container">
       <div className="header">
         <img src="/hero.jpg"></img>
-        <div className="title">Food Pairing App</div>
+        {/* <div className="title">Food Pairing App</div> */}
       </div>
       <div className="tabs">
         <h1
