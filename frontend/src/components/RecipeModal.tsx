@@ -49,7 +49,13 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
                         {recipeIngredients.map((ingredient) => (
 
                             <div className="modal-ingredient">
-                                <img src={`https://spoonacular.com/cdn/ingredients_100x100/` + ingredient.image} alt=""></img>
+
+                                <div className="modal-images">
+                                    <img
+                                        className="ingredient-image" src={`https://spoonacular.com/cdn/ingredients_100x100/` + ingredient.image} alt="">
+                                    </img>
+                                </div>
+
                                 <h3>{[ingredient.name]}</h3>
                                 <p>{ingredient.amount} {ingredient.unit}</p>
                             </div>
