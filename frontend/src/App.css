@@ -148,6 +148,14 @@ button {
   margin: 10px 0px;
 }
 
+.modal-ingredient {
+  display: flex;
+  padding: 10px;
+  margin-top: 50px;
+  box-shadow: 0 4px 6px rgb(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
 .tabs {
   display: flex;
   gap: 2em;
