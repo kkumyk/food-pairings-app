@@ -12,7 +12,6 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
     const [recipeIngredients, getRecipeIngredients] = useState<RecipeIngredients[]>();
     const [recipeInstructions, getRecipeInstructions] = useState<RecipeInstructions[]>();
 
-
     useEffect(() => {
         const fetchRecipeInformation = async () => {
             try {
@@ -52,9 +51,9 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
                                 <div className="modal-images">
                                     <img className="ingredient-image" src={`https://spoonacular.com/cdn/ingredients_100x100/` + ingredient.image} alt=""></img>
                                 </div>
-                                
+
                                 <div className="ingredient-name">
-                                    <h3>{[ingredient.name]}</h3>
+                                    <h4>{[ingredient.name]}</h4>
                                     <p>{ingredient.amount} {ingredient.unit}</p>
                                 </div>
 
@@ -76,6 +75,5 @@ const RecipeModal = ({ recipeId, onClose }: Props) => {
         </>
     );
 };
-
 export default RecipeModal;
 

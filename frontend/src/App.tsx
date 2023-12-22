@@ -5,6 +5,7 @@ import { Recipe } from "./types";
 import RecipeCard from "./components/RecipeCard";
 import RecipeModal from "./components/RecipeModal";
 import { AiOutlineSearch } from "react-icons/ai";
+import OuterContainer from "./components/Container";
 
 type Tabs = "search" | "favourites";
 
@@ -15,7 +16,6 @@ const App = () => {
   // for now we hardcode the values ("beef,+tomatoes") to test the endpoint and to call it from our frontend
 
   const [searchTerms, setSearchTerms] = useState<string>(""); // beef,+tomatoes
-
   // state object
   // this uS hook is going to contain an array of recipes
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -28,11 +28,9 @@ const App = () => {
   const [selectedTab, setSelectedTab] = useState<Tabs>("search");
   const [favouriteRecipes, setFavoutriteRecipes] = useState<Recipe[]>([])
 
-
   // since we want to load the data when the app launches, we are going to use uE hook
   useEffect(() => {
     const fetchFavouriteRecipes = async () => {
-
       try {
         const favouriteRecipes = await api.getFavouriteRecipes();
         setFavoutriteRecipes(favouriteRecipes.results);
@@ -40,7 +38,6 @@ const App = () => {
         console.log(error);
       }
     }
-
     fetchFavouriteRecipes();
   }, [])
 
@@ -83,25 +80,16 @@ const App = () => {
   // add a UI to call your endpoint from frontend - a button that will call handleSearchSubmit function
   return (
     <div className="app-container">
-      <div className="header">
-        <img src="/hero.jpg"></img>
-        {/* <div className="title">Food Pairing App</div> */}
-      </div>
-      <div className="tabs">
-        <h1
-          className={selectedTab === "search" ? "tab-active" : ""}
-          onClick={() => setSelectedTab("search")}
-        >
-          Food Pairings
-        </h1>
+      <div className="header"><img src="/still-life.jpg"></img></div>
 
-        <h1
-          className={selectedTab === "favourites" ? "tab-active" : ""}
+      <div className="tabs">
+        <h1 className={selectedTab === "search" ? "tab-active" : ""}
+          onClick={() => setSelectedTab("search")}>Food Pairings</h1>
+        <h1 className={selectedTab === "favourites" ? "tab-active" : ""}
           onClick={() => setSelectedTab("favourites")}>Favourites</h1>
       </div>
 
       {selectedTab === "search" && (<>
-
         <form onSubmit={(event) => handleSearchSubmit(event)}>
           <input
             type="text"
@@ -120,12 +108,10 @@ const App = () => {
         </form>
 
         <div className="recipe-grid">
-
           {recipes.map((recipe) => {
             const isFavourite = favouriteRecipes.some(
               (favRecipe) => recipe.id === favRecipe.id
             );
-
             return (
               <RecipeCard
                 recipe={recipe}
@@ -138,10 +124,8 @@ const App = () => {
         </div>
       </>
       )}
-
       {selectedTab === "favourites" && (
         <div className="recipe-grid">
-
           {favouriteRecipes.map((recipe) => (
             <RecipeCard
               recipe={recipe}
@@ -152,13 +136,13 @@ const App = () => {
           ))}
         </div>
       )}
-
       {selectedRecipe ? (
         <RecipeModal
           recipeId={selectedRecipe.id.toString()}
           onClose={() => setSelectedRecipe(undefined)}
         />
-      ) : null}
+      ) : null};
+
     </div>
   );
 };
