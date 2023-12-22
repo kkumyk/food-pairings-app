@@ -133,7 +133,7 @@ button {
   background-color: white;
   padding: 2em;
   border-radius: 4px;
-  max-width: 500px;
+  max-width: 1000px;
   color: #6e686b;
 }
 
@@ -143,18 +143,21 @@ button {
 
 .modal-instructions ol {
   margin-left: 0px;
+  /* display: flex; */
 }
 
 .modal-instructions li {
   margin: 10px 0px;
 }
 
-.modal-ingredient {
+.modal-ingredients {
   display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
   box-shadow: 0 4px 6px rgb(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 .modal-images {
@@ -170,7 +173,7 @@ button {
 }
 
 .ingredient-name {
-  margin-left: 50px;
+  margin-left: 20px;
 }
 
 .tabs {
