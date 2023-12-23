@@ -5,7 +5,6 @@ import { Recipe } from "./types";
 import RecipeCard from "./components/RecipeCard";
 import RecipeModal from "./components/RecipeModal";
 import { AiOutlineSearch } from "react-icons/ai";
-import OuterContainer from "./components/Container";
 
 type Tabs = "search" | "favourites";
 
@@ -80,7 +79,7 @@ const App = () => {
   // add a UI to call your endpoint from frontend - a button that will call handleSearchSubmit function
   return (
     <div className="app-container">
-      <div className="header"><img src="/still-life.jpg"></img></div>
+      <div className="header"><img src="./src/assets/veg.jpg"></img></div>
 
       <div className="tabs">
         <h1 className={selectedTab === "search" ? "tab-active" : ""}
@@ -141,7 +140,7 @@ const App = () => {
           recipeId={selectedRecipe.id.toString()}
           onClose={() => setSelectedRecipe(undefined)}
         />
-      ) : null};
+      ) : null}
 
     </div>
   );
