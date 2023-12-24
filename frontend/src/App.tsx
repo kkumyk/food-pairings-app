@@ -5,6 +5,7 @@ import { Recipe } from "./types";
 import RecipeCard from "./components/RecipeCard";
 import RecipeModal from "./components/RecipeModal";
 import { AiOutlineSearch } from "react-icons/ai";
+import LimitReached from "./components/LimitReached";
 
 type Tabs = "search" | "favourites";
 
@@ -38,7 +39,7 @@ const App = () => {
       }
     }
     fetchFavouriteRecipes();
-  }, [])
+  }, []);
 
   // add event handler that is going to call our backend endpoint
   const handleSearchSubmit = async (event: FormEvent) => {
@@ -105,9 +106,9 @@ const App = () => {
             <AiOutlineSearch size={40} />
           </button>
         </form>
-
         <div className="recipe-grid">
-          {recipes.map((recipe) => {
+
+          {recipes.length != 0 ? (recipes.map((recipe) => {
             const isFavourite = favouriteRecipes.some(
               (favRecipe) => recipe.id === favRecipe.id
             );
@@ -119,12 +120,18 @@ const App = () => {
                 isFavourite={isFavourite}
               />
             );
-          })}
+          })) : <LimitReached limitMessage={{
+            "message": "Your daily points limit of 150 has been reached."
+          }} />
+          }
+
         </div>
+
       </>
       )}
       {selectedTab === "favourites" && (
         <div className="recipe-grid">
+
           {favouriteRecipes.map((recipe) => (
             <RecipeCard
               recipe={recipe}
@@ -132,7 +139,9 @@ const App = () => {
               onFavouriteButtonClick={() => removeFavouriteRecipe}
               isFavourite={true}
             />
-          ))}
+          ))
+          }
+
         </div>
       )}
       {selectedRecipe ? (

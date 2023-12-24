@@ -8,21 +8,23 @@ export interface Recipe {
     usedIngredientCount: number;
 }
 
-
 export interface RecipeIngredients {
     name: string;
     image: string;
     unit: string;
-    amount:number;
+    amount: number;
 }[];
-
 
 export interface RecipeInstructions {
     step: string;
 }[];
 
-
 export interface RecipeInfo {
     ingredients: RecipeIngredients;
     instructions: RecipeInstructions;
 }
+
+export interface Limit {
+    message: string;
+}
+
