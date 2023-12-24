@@ -31,29 +31,24 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/api/recipes/search", async (req, res) => {
-    const searchTerms = req.query.searchTerms as string;
-    const page = parseInt(req.query.page as string);
-    const ranking = parseInt(req.query.ranking as string);
-    const sort = req.query.sortOption as string;
-    const results = await RecipeAPI.searchRecipes(searchTerms, page, ranking, sort);
-    return res.json(results);
-})
+    try {
+        const searchTerms = req.query.searchTerms as string;
+        const page = parseInt(req.query.page as string);
+        const ranking = parseInt(req.query.ranking as string);
+        const sort = req.query.sortOption as string;
+        const results = await RecipeAPI.searchRecipes(searchTerms, page, ranking, sort);
+        return res.json(results);
 
-// app.get("/api/recipes/:recipeId/ingredients", async (req, res) => {
-//     const recipeId = req.params.recipeId;
-//     const results = await RecipeAPI.getRecipeIngredients(recipeId);
-//     return res.json(results);
-// });
-
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 app.get("/api/recipes/:recipeId/information", async (req, res) => {
     const recipeId = req.params.recipeId;
     const results = await RecipeAPI.getRecipeInformation(recipeId);
     return res.json(results);
 });
-
-
-
 
 app.post("/api/recipes/favourite", async (req, res) => {
     const recipeId = req.body.recipeId;
@@ -72,20 +67,17 @@ app.post("/api/recipes/favourite", async (req, res) => {
 });
 
 app.get("/api/recipes/favourite", async (req, res) => {
-
     try {
         const recipes = await prismaClient.favouriteRecipes.findMany();
         const recipeIds = recipes.map((recipe) => recipe.recipeId.toString());
-
         const favourites = await RecipeAPI.getFavouriteRecipesByIDs(recipeIds);
-
         return res.json(favourites);
+
     } catch (error) {
         console.log(error);
         return res.status(500).json({ error: "Oops, something went wrong" });
     }
 });
-
 
 app.delete("/api/recipes/favourite", async (req, res) => {
     const recipeId = req.body.recipeId;
