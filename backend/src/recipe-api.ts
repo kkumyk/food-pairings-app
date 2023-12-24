@@ -5,12 +5,13 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
     if (!apiKey) {
         throw new Error("API key not found")
     }
+
     const url = new URL("https://api.spoonacular.com/recipes/findByIngredients"); // base URL
 
     const queryParams = {
         apiKey: apiKey,
         ingredients: searchTerms,
-        number: "5",
+        number: "99",
         ranking: "1",
         sort: "max-used-ingredients",
     }
@@ -21,11 +22,16 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
         const resultsJson = await searchResponse.json();
 
         if (Array.isArray(resultsJson)) {
-            return resultsJson.filter(recipe => recipe.usedIngredientCount > 1);
+            let filteredResults = resultsJson.filter(recipe => recipe.usedIngredientCount > 1);
+            return filteredResults;
         } else {
             return resultsJson;
+            // {
+            //     "status": "failure",
+            //     "code": 402,
+            //     "message": "Your daily points limit of 150 has been reached. Please upgrade your plan to continue using the API."
+            // }
         }
-
     } catch (error) {
         console.log(error);
     }
@@ -47,10 +53,6 @@ export const getRecipeInformation = async (recipeId: string) => {
     return informationObject;
 };
 
-
-
-// TODO: add function to remove the favourite recipes from the favourite tab as well;
-
 export const getFavouriteRecipesByIDs = async (ids: string[]) => {
     if (!apiKey) {
         throw new Error("API Key not found");
@@ -66,5 +68,14 @@ export const getFavouriteRecipesByIDs = async (ids: string[]) => {
     const searchResponse = await fetch(url);
     const json = await searchResponse.json();
 
-    return { results: json };
+    if (Array.isArray(json)) {
+        return { results: json };
+    } else {
+        return json;
+        // {
+        //         "status": "failure",
+        //         "code": 402,
+        //         "message": "Your daily points limit of 150 has been reached. Please upgrade your plan to continue using the API."
+        //  }
+    };
 };
