@@ -1,19 +1,19 @@
-import { Limit } from "../types"
+// import { Limit } from "../types"
 
 
-interface Props {
-    limitMessage: Limit;
-}
+// interface Props {
+//     limitMessage: Limit;
+// }
 
-const LimitReached = ({ limitMessage }: Props) => {
-    return (
-        <div className="limit-card">
-            <div className="limit-card">
-                <h3>{limitMessage.message}</h3>
+// const LimitReached = ({ limitMessage }: Props) => {
+//     return (
+//         <div className="limit-card">
+//             <div className="limit-card">
+//                 <h3>{limitMessage.message}</h3>
 
-            </div>
-        </div>
-    );
-};
+//             </div>
+//         </div>
+//     );
+// };
 
-export default LimitReached;
+// export default LimitReached;

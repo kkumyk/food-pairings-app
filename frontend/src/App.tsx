@@ -5,7 +5,7 @@ import { Recipe } from "./types";
 import RecipeCard from "./components/RecipeCard";
 import RecipeModal from "./components/RecipeModal";
 import { AiOutlineSearch } from "react-icons/ai";
-import LimitReached from "./components/LimitReached";
+// import LimitReached from "./components/LimitReached";
 
 type Tabs = "search" | "favourites";
 
@@ -108,7 +108,7 @@ const App = () => {
         </form>
         <div className="recipe-grid">
 
-          {recipes.length != 0 ? (recipes.map((recipe) => {
+          {recipes.map((recipe) => {
             const isFavourite = favouriteRecipes.some(
               (favRecipe) => recipe.id === favRecipe.id
             );
@@ -120,15 +120,11 @@ const App = () => {
                 isFavourite={isFavourite}
               />
             );
-          })) : <LimitReached limitMessage={{
-            "message": "Your daily points limit of 150 has been reached."
-          }} />
-          }
-
+          })}
         </div>
-
       </>
       )}
+
       {selectedTab === "favourites" && (
         <div className="recipe-grid">
 
