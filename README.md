@@ -19,3 +19,4 @@
     - create a table: _CREATE TABLE "FavouriteRecipes" (id SERIAL PRIMARY KEY,"recipeId" INTEGER);_ 
 4. Connect _public_ DB with the one table _FavouriteRecipes_ to the client via Prisma by adding your local connection URL to your _.env_ file:
 _DATABASE_URL=postgresql://postgres:YOUR-PASSWORD@localhost:5432/postgres_
+Source: [Connect your database](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-node-postgresql); [PostgreSQL](https://www.prisma.io/docs/orm/overview/databases/postgresql)
