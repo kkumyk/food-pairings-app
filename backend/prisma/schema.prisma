@@ -11,7 +11,7 @@ datasource db {
 }
 
 // create a favourite recipes model to represent our database "Favourite Recipes" table
-model FavouriteRecipes {
-  id       Int @id @default(autoincrement())
-  recipeId Int @unique
-}
+// model FavouriteRecipes {
+//   id       Int @id @default(autoincrement())
+//   recipeId Int @unique
+// }
