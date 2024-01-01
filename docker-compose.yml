@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  postgres:
+    container_name: recipes_db
+    image: postgres:15.5
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=MY_PASSWORD
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+  backend:
+    container_name: recipes_backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev  # on move to prod, update this
+    volumes:
+      - /app/node_modules
+      - ./backend/config:/app/config
+      - ./backend/src:/app/src
+      - ./backend/test:/app/test
+    ports:
+      - "5000:5000"
+  frontend:
+    container_name: recipes_frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev  # on move to prod, update this
+    volumes:
+      - /app/node_modules
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+    ports:
+      - "8080:8080"
