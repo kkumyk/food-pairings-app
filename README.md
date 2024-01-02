@@ -38,7 +38,7 @@ This app is a learning project based on [Chris Blakely tutorial](https://www.you
 ## Setting Up
 #### 1. Clone the Repository
 ```
-git clone https://github.com/kkumyk/two-ingredients-app.git
+git clone https://github.com/kkumyk/food-pairings-app.git
 cd two-ingredients-app
 ```
 ### Backend Setup
