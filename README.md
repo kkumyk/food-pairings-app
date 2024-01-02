@@ -2,7 +2,9 @@
 
 This app is inspired by the ["The Flavour Thesaurus"](https://www.amazon.co.uk/Flavour-Thesaurus-Niki-Segnit/dp/0747599777) book which explores pairs of food together with one or two recipes to try out. 
 
-The idea behind this app is to merge the concept of the above book with the capabilities provided by the [Spoonacular Food API](https://spoonacular.com/food-api). As a result, the app allows to search recipes based on two ingredients provided by the user and save and store the best of them.
+The idea behind this app is to merge the concept of the above book with the capabilities provided by the [Spoonacular Food API](https://spoonacular.com/food-api). As a result, the app allows to search recipes based on two ingredients provided by the user, as well as save and store the favourite recipes.
+
+![Recipe Modal Content](./readme_docs/food-pairings-tab.jpg)
 
 ## Tech Stack
 - React + Typescript
@@ -16,6 +18,7 @@ This app is a learning project based on [Chris Blakely tutorial](https://www.you
 1. Local PostgreSQL is used instead of ElephantSQL.
 2. Endpoints used in the tutorial were replaced with the [Search Recipes by Nutrients](https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients) and [Get Recipe Information](https://spoonacular.com/food-api/docs#Get-Recipe-Information) to address the new purpose of the app.
 3. RecipeModal component was restructured as it now shows different content. It also needed additional CSS to be applied based on this changes.
+![Recipe Modal Content](./readme_docs/recipe-modal-component.jpg)
 4. Double usage of API calls was fixed.
 
 <details>
