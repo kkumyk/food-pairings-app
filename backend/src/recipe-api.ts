@@ -26,11 +26,6 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
             return filteredResults;
         } else {
             return resultsJson;
-            // {
-            //     "status": "failure",
-            //     "code": 402,
-            //     "message": "Your daily points limit of 150 has been reached. Please upgrade your plan to continue using the API."
-            // }
         }
     } catch (error) {
         console.log(error);
@@ -72,10 +67,5 @@ export const getFavouriteRecipesByIDs = async (ids: string[]) => {
         return { results: json };
     } else {
         return json;
-        // {
-        //         "status": "failure",
-        //         "code": 402,
-        //         "message": "Your daily points limit of 150 has been reached. Please upgrade your plan to continue using the API."
-        //  }
     };
 };

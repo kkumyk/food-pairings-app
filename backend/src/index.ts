@@ -11,14 +11,6 @@ for this to happen, import the contents of the recipe-api.ts file
 
 // this line creates a new express app;
 const app = express();
-
-// http://localhost:5000/api/recipes/search?searchTerms=beef,+tomatoes&page=1&ranking=1&sort=max-used-ingredients&number=1
-// http://localhost:5000/api/recipes/646572/ingredients
-
-// http://localhost:5000/api/recipes/716429/information?includeNutrition=false
-
-// https://api.spoonacular.com/recipes/716429/information?includeNutrition=false
-
 const prismaClient = new PrismaClient();
 
 /*
