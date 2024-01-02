@@ -2,8 +2,7 @@
 
 This app is inspired by the ["The Flavour Thesaurus"](https://www.amazon.co.uk/Flavour-Thesaurus-Niki-Segnit/dp/0747599777) book which explores pairs of food together with one or two recipes to try out. 
 
-The idea behind this app is to merge the concept of the above book with the capabilities provided by the [Spoonacular Food API](https://spoonacular.com/food-api). As a result, the app allows to search recipes based on two ingredients provided by the user and save and store the best of them. 
-
+The idea behind this app is to merge the concept of the above book with the capabilities provided by the [Spoonacular Food API](https://spoonacular.com/food-api). As a result, the app allows to search recipes based on two ingredients provided by the user and save and store the best of them.
 
 ## Tech Stack
 - React + Typescript
@@ -11,52 +10,48 @@ The idea behind this app is to merge the concept of the above book with the capa
 - PostgreSQL
 - RESTful API
 
+## Credits & Adjustments
+This app is a learning project based on [Chris Blakely tutorial](https://www.youtube.com/watch?v=5wwaQ4GiSNU). The following changes were introduced so far:
+
+1. Local PostgreSQL is used instead of ElephantSQL.
+2. Endpoints used in the tutorial were replaced with the [Search Recipes by Nutrients](https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients) and [Get Recipe Information](https://spoonacular.com/food-api/docs#Get-Recipe-Information) to address the new purpose of the app.
+3. RecipeModal component was restructured as it now shows different content. It also needed additional CSS to be applied based on this changes.
+4. Double usage of API calls was fixed.
+
+<details>
+  <summary>Planned Improvements</summary>
+
+1. Add a component that notifies the user that the API credits are run out.
+2. Add a function that allows to delete favourite recipes from the "Favourites" tab. At the moment it is only possible from the "Food Pairings" tab.
+3. Add a component that lists food pairing combinations for the user to choose from. This option should not replace the search function but complement it.
+4. Dockerise the application.
+</details>
+
 ## Prerequisites
 - Node.js and npm installed on your machine.
 - PostgreSQL is set up locally on your machine. 
 - [A Spoonacular API key](https://spoonacular.com/food-api) for the recipe API.
 
 ## Setting Up
-1. Clone the Repository
+#### 1. Clone the Repository
 ```
 git clone https://github.com/kkumyk/two-ingredients-app.git
 cd two-ingredients-app
 ```
 ### Backend Setup
-2. Navigate to the backend directory and install dependencies:
+ #### 2. Navigate to the backend directory and install dependencies:
 ```
 cd backend
 npm install
 ```
-3. Add .env file to the backend folder with the following content:
+#### 3. Add .env file to the backend folder with the following content:
 ```
 API_KEY=your-spoonacular-api-key
 DATABASE_URL=connection-url
 ```
-For the DB set-up see the ["PostgreSQL Local Setup"](#postgresql-local-setup) section below.
-
-4. Initialize Prisma and generate the Prisma client
-```
-npx prisma init
-npx prisma generate
-```
-5. Start the backend server
-```
-npm start
-```
-### Frontend Setup
-1. Navigate to the frontend directory and install dependencies:
-```
-cd frontend
-npm install
-```
-2. Start the frontend development server
-```
-npm run dev
-```
-
-## PostgreSQL Local Setup
-(Ubuntu + VSCode)
+For the DB set-up see the "PostgreSQL Local Setup" section below.
+<details>
+  <summary>PostgreSQL Local Setup (Ubuntu + VSCode)</summary>
 
 1. Install PostgreSQL extension in VSCode and add a new connection by providing:
     - "host": "localhost",
@@ -78,8 +73,33 @@ npm run dev
 - _DATABASE_URL=postgresql://postgres:YOUR-PASSWORD@localhost:5432/postgres_
 - Sources: [Connect your database](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-node-postgresql); [PostgreSQL](https://www.prisma.io/docs/orm/overview/databases/postgresql)
 
+</details>
 
-### Troubleshooting
+
+#### 4. Initialize Prisma and generate the Prisma client
+```
+npx prisma init
+npx prisma generate
+```
+#### 5. Start the backend server
+```
+npm start
+```
+### Frontend Setup
+#### 1. Navigate to the frontend directory and install dependencies:
+```
+cd frontend
+npm install
+```
+#### 2. Start the frontend development server
+```
+npm run dev
+```
+
+### WIP Notes
+<details>
+  <summary>Troubleshooting Postgres Installation</summary>
+
 #### Check PostgreSQL service status in Linux:
 - sudo systemctl status postgresql
 
@@ -89,4 +109,4 @@ npm run dev
 
 #### [Docker & Postgres: Failed to bind tcp 0.0.0.0:5432 address already in use error](https://stackoverflow.com/questions/38249434/docker-postgres-failed-to-bind-tcp-0-0-0-05432-address-already-in-use):
 - sudo systemctl stop postgresql to deactivate postgres
-
+</details>
