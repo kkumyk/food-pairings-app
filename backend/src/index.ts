@@ -28,7 +28,7 @@ app.get("/api/recipes/search", async (req, res) => {
         const page = parseInt(req.query.page as string);
         const ranking = parseInt(req.query.ranking as string);
         const sort = req.query.sortOption as string;
-        const results = await RecipeAPI.searchRecipes(searchTerms, page, ranking, sort);
+        const results = await RecipeAPI.searchRecipes(searchTerms);
         return res.json(results);
 
     } catch (error) {

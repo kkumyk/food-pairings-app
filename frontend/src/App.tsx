@@ -93,7 +93,7 @@ const App = () => {
           <input
             type="text"
             required
-            placeholder="Enter two ingredients..."
+            placeholder="Enter two or more ingredients..."
             // set up a state hook to capture the input and to handle the change of the input
             value={searchTerms}
             // onChange method is a callback function which takes the event and

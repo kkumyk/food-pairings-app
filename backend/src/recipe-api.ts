@@ -1,30 +1,29 @@
 require('dotenv').config();
 const apiKey = process.env.API_KEY;
 
-export const searchRecipes = async (searchTerms: string, page: number, ranking: number, sortOption: string) => {
+// http://localhost:5000/api/recipes/search?searchTerms=beef,+tomato&page=1&ranking=1&sort=max-used-ingredients&number=1
+
+export const searchRecipes = async (searchTerms: string) => {
     if (!apiKey) {
         throw new Error("API key not found")
     }
+
+    const ingredientsChecked = searchTerms.split(",").map(function (e) { return e.replace(/[^a-zA-Z]/g, "") }).join(",");
+    // console.log(ingredientsChecked)
 
     const url = new URL("https://api.spoonacular.com/recipes/findByIngredients"); // base URL
 
     const queryParams = {
         apiKey: apiKey,
-        ingredients: searchTerms,
-        number: "99",
-        ranking: "1",
-        sort: "max-used-ingredients",
+        ingredients: ingredientsChecked,
+        number: "99"
     }
     // attach query params to URL
     url.search = new URLSearchParams(queryParams).toString();
+   
     try {
-
-        const ingredientsCheck = searchTerms.split(",").map(function (e) { return e.replace(/[^a-zA-Z]/g, "") });
-        // console.log(ingredientsCheck);
-
         const searchResponse = await fetch(url);
         const resultsJson = await searchResponse.json();
-
 
         if (Array.isArray(resultsJson)) {
 
