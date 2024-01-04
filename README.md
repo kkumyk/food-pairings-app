@@ -28,6 +28,7 @@ This app is a learning project based on [Chris Blakely tutorial](https://www.you
 2. Add a function that allows to delete favourite recipes from the "Favourites" tab. At the moment it is only possible from the "Food Pairings" tab.
 3. Add a component that lists food pairing combinations for the user to choose from. This option should not replace the search function but complement it.
 4. Dockerise the application.
+5. Notify the user where no food pairings were found.
 </details>
 
 ## Prerequisites
