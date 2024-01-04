@@ -18,12 +18,19 @@ export const searchRecipes = async (searchTerms: string, page: number, ranking: 
     // attach query params to URL
     url.search = new URLSearchParams(queryParams).toString();
     try {
+
+        const ingredientsCheck = searchTerms.split(",").map(function (e) { return e.replace(/[^a-zA-Z]/g, "") });
+        // console.log(ingredientsCheck);
+
         const searchResponse = await fetch(url);
         const resultsJson = await searchResponse.json();
 
+
         if (Array.isArray(resultsJson)) {
-            let filteredResults = resultsJson.filter(recipe => recipe.usedIngredientCount > 1);
+
+            let filteredResults = resultsJson.filter(recipe => recipe.unusedIngredients.length === 0);
             return filteredResults;
+
         } else {
             return resultsJson;
         }
