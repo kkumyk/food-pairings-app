@@ -37,11 +37,12 @@ This app is a learning project based on [Chris Blakely tutorial](https://www.you
 - [A Spoonacular API key](https://spoonacular.com/food-api) for the recipe API.
 
 ## Setting Up
-#### 1. Clone the Repository
+#### 1. Clone the Repository & change to the app's folder
 ```
 git clone https://github.com/kkumyk/food-pairings-app.git
-cd two-ingredients-app
+cd food-pairings-app
 ```
+
 ### Backend Setup
  #### 2. Navigate to the backend directory and install dependencies:
 ```
@@ -82,7 +83,6 @@ For the DB set-up see the "PostgreSQL Local Setup" section below.
 
 #### 4. Initialize Prisma and generate the Prisma client
 ```
-npx prisma init
 npx prisma generate
 ```
 #### 5. Start the backend server
