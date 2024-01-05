@@ -17,18 +17,18 @@ This app is a learning project based on [Chris Blakely tutorial](https://www.you
 
 1. Local PostgreSQL is used instead of ElephantSQL.
 2. Endpoints used in the tutorial were replaced with the [Search Recipes by Nutrients](https://spoonacular.com/food-api/docs#Search-Recipes-by-Ingredients) and [Get Recipe Information](https://spoonacular.com/food-api/docs#Get-Recipe-Information) to address the new purpose of the app.
-3. RecipeModal component was restructured as it now shows different content. It also needed additional CSS to be applied based on this changes.
+3. RecipeModal component was restructured as it now shows different content. It also needed additional CSS to be applied based on this change.
 ![Recipe Modal Content](./readme_docs/recipe-modal-component.jpg)
-4. Double usage of API calls was fixed.
+4. Double usage of API calls bug was fixed.
 
 <details>
   <summary>Planned Improvements</summary>
 
-1. Add a component that notifies the user that the API credits are run out.
+1. Add a component to notify the user that the API credits are run out.
 2. Add a function that allows to delete favourite recipes from the "Favourites" tab. At the moment it is only possible from the "Food Pairings" tab.
 3. Add a component that lists food pairing combinations for the user to choose from. This option should not replace the search function but complement it.
 4. Dockerise the application.
-5. Notify the user where no food pairings were found.
+5. Notify the user when no recipes for the provided ingredients were found.
 </details>
 
 ## Prerequisites
