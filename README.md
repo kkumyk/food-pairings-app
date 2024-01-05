@@ -1,8 +1,8 @@
 # Food Pairings App
 
-This app is inspired by the ["The Flavour Thesaurus"](https://www.amazon.co.uk/Flavour-Thesaurus-Niki-Segnit/dp/0747599777) book which explores pairs of food together with one or two recipes to try out. 
+This app is inspired by the ["The Flavour Thesaurus"](https://www.amazon.co.uk/Flavour-Thesaurus-Niki-Segnit/dp/0747599777) book which describes best matching pairs of food. 
 
-The idea behind this app is to merge the concept of the above book with the capabilities provided by the [Spoonacular Food API](https://spoonacular.com/food-api). As a result, the app allows to search recipes based on two ingredients provided by the user, as well as save and store the favourite recipes.
+This app merges the concept of food pairing with the capabilities of the [Spoonacular Food API](https://spoonacular.com/food-api). As a result, the app allows to search recipes based on two or more ingredients provided by the user. The user can also save and store favourite recipes in a separate tab.
 
 ![Recipe Modal Content](./readme_docs/food-pairings-tab.jpg)
 
