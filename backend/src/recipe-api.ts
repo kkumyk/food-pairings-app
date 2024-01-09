@@ -20,7 +20,7 @@ export const searchRecipes = async (searchTerms: string) => {
     }
     // attach query params to URL
     url.search = new URLSearchParams(queryParams).toString();
-   
+
     try {
         const searchResponse = await fetch(url);
         const resultsJson = await searchResponse.json();
@@ -28,7 +28,8 @@ export const searchRecipes = async (searchTerms: string) => {
         if (Array.isArray(resultsJson)) {
 
             let filteredResults = resultsJson.filter(recipe => recipe.unusedIngredients.length === 0);
-            return filteredResults;
+
+            return (filteredResults.length !== 0) ? filteredResults : [{ title: "No recipes found.", image: "" }];
 
         } else {
             return resultsJson;
