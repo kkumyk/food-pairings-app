@@ -23,16 +23,18 @@ export const searchRecipes = async (searchTerms: string) => {
 
     try {
         const searchResponse = await fetch(url);
-        const resultsJson = await searchResponse.json();
 
-        if (Array.isArray(resultsJson)) {
+        if (searchResponse.status === 200) {
+            const resultsJson = await searchResponse.json();
+            if (Array.isArray(resultsJson)) {
+                let filteredResults = resultsJson.filter(recipe => recipe.unusedIngredients.length === 0);
+                return (filteredResults.length !== 0) ? filteredResults : [{ title: "No recipes found.", image: "" }];
+            }
 
-            let filteredResults = resultsJson.filter(recipe => recipe.unusedIngredients.length === 0);
-
-            return (filteredResults.length !== 0) ? filteredResults : [{ title: "No recipes found.", image: "" }];
-
+        } else if (searchResponse.status === 402) {
+            return [{ title: "Daily quota reached. ", image: "" }];
         } else {
-            return resultsJson;
+            return [{ title: "No recipes found.", image: "" }]; //resultsJson;
         }
     } catch (error) {
         console.log(error);
